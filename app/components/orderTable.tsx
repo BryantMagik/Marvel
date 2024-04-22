@@ -9,10 +9,12 @@ interface OrderTableProps {
 
 const OrderTable: React.FC<OrderTableProps> = ({ onClick, nameTable }) => {
     return (
-        <Button variant="ghost" onClick={onClick}>
-            {nameTable}
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <div className="flex place-content-center">
+            <Button className="border-0" variant="ghost" onClick={onClick}>
+                {nameTable}
+                <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+        </div>
     )
 }
 

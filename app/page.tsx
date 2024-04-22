@@ -1,45 +1,23 @@
 "use client"
-import React, { useState, useEffect, useCallback } from 'react';
-import { v4 as uuidv4 } from 'uuid'
-import { Hero } from "./types/hero";
-import { DataTable } from "./components/DataTable/DataTable";
-import { columns } from "./types/column";
-import initialData from '@/data/wikipedia_marvel_data.json';
-import AddHeroForm from './components/addHeroButton';
-import useLocalStorage from './hooks/useLocalStorage';
+
+import React from 'react'
+import { DataTable } from "./components/DataTable/DataTable"
+import { columns } from "./types/column"
+import AddHeroForm from './components/addHeroButton'
+import { useHeroService } from './components/services/heroService'
 
 const Home: React.FC = () => {
-
-  const [heroes, setHeroes] = useLocalStorage('marvelData', initialData);
-
-  function handleAddHero(newHero: any) {
-    const newData = [newHero, ...heroes];
-    setHeroes(newData);
-    localStorage.setItem('marvelData', JSON.stringify(newData));
-  }
-
-  const handleEditHero = useCallback((editedHero: Hero) => {
-
-    const heroesEditados = heroes.map(hero =>
-      hero.nameLabel === editedHero.nameLabel ? editedHero : hero
-    )
-
-    setHeroes(heroesEditados);
-    localStorage.setItem('marvelData', JSON.stringify(heroesEditados));
-  }, [heroes]);
-
-  const handleDeleteHero = useCallback((hero: Hero) => {
-    const updatedHeroes = heroes.filter(h => h.nameLabel !== hero.nameLabel);
-    setHeroes(updatedHeroes);
-    localStorage.setItem('marvelData', JSON.stringify(updatedHeroes));
-  }, [heroes]);
+  const { heroes, handleAddHero, handleEditHero, handleDeleteHero } = useHeroService();
 
   return (
-    <div>
-      <AddHeroForm onAddHero={handleAddHero} />
+    <div className='container mx-auto bg-gradient-to-r from-slate-900 to-slate-700 p-8'>
+      <h1 className='text-3xl text-center text-white mb-8'>Heroes</h1>
+      <div className='flex items-stretch'>
+        <AddHeroForm onAddHero={handleAddHero} />
+      </div>
       <DataTable columns={columns(handleEditHero, handleDeleteHero)} data={heroes} />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

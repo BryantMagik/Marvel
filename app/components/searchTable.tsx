@@ -1,5 +1,6 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 interface SearchTableProps {
     value: string
@@ -8,13 +9,12 @@ interface SearchTableProps {
 
 const SearchTable: React.FC<SearchTableProps> = ({ value, onChange }) => {
     return (
-        <div className="flex w-60 py-4">
-            <Input
-                placeholder="Buscar héroe específicos"
-                value={value}
-                onChange={onChange}
-            />
-        </div>
+        <Input
+            className="border-sky-500 neon-border text-white w-60"
+            placeholder="Encuentra al héroe que buscas..."
+            value={value}
+            onChange={onChange}
+        />
     )
 }
 

@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Row } from '@tanstack/react-table'
-import { MoreHorizontal } from 'lucide-react'
-import React, { useState } from 'react'
+import { Delete, MoreHorizontal, Pencil } from 'lucide-react'
+import React from 'react'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -27,10 +27,11 @@ const DataTableRowActions: React.FC<DataTableRowActionsProps<Hero>> = ({ row, on
                     <MoreHorizontal className="h-4 w-4" />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className='bg-black'>
                 <EditHeroForm hero={row.original} onSave={(editedHero) => { onEdit(editedHero) }} />
+
                 <DropdownMenuSeparator />
-                <Button className='border-0' variant="outline" onClick={() => onDelete(row.original)}>Borrar Héroe</Button>
+                <Button className='border-0 flex space-x-4 ' variant="outline" onClick={() => onDelete(row.original)}>Borrar Héroe</Button>
             </DropdownMenuContent>
         </DropdownMenu>
     )

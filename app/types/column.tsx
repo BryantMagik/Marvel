@@ -4,13 +4,14 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Hero } from "./hero"
 import OrderTable from "../components/orderTable"
 import DataTableRowActions from "../components/DataTable/DataTableRowActions"
+import { Search, Settings } from "lucide-react"
 
 export const columns = (onEdit: (hero: Hero) => void, onDelete: (hero: Hero) => void): ColumnDef<Hero>[] => [
     {
         accessorKey: "nameLabel",
         header: ({ column }) => {
             return (
-                <OrderTable onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} nameTable="Heroe" />
+                <OrderTable onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} nameTable="Nombre" />
             )
         },
     },
@@ -66,16 +67,23 @@ export const columns = (onEdit: (hero: Hero) => void, onDelete: (hero: Hero) => 
         },
     },
     {
-        accessorKey: "acciones",
-        header: ({ column }) => {
+        accessorKey: `Ajustes`,
+        header: () => {
+            return (
+                <div className="flex place-content-center">
+                    <Settings />
+                </div>
+            )
         },
         cell: ({ row }) => {
             return (
-                <DataTableRowActions
-                    row={row}
-                    onEdit={onEdit}
-                    onDelete={onDelete}
-                />
+                <div className="flex place-content-center">
+                    <DataTableRowActions
+                        row={row}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
+                    />
+                </div>
             )
         }
 

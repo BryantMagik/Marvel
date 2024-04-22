@@ -1,38 +1,37 @@
-// components/HeroForm.tsx
-import React, { useState, useCallback } from 'react';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Hero } from '@/app/types/hero';
+import React, { useState, useCallback } from 'react'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Hero } from '@/app/types/hero'
 
 interface HeroFormProps {
-    initialHero: Hero;
-    onSubmit: (hero: Hero) => void;
+    initialHero: Hero
+    onSubmit: (hero: Hero) => void
 }
 
 const HeroForm: React.FC<HeroFormProps> = ({ initialHero, onSubmit }) => {
-    const [heroFields, setHeroFields] = useState<Hero>(initialHero);
-    const [error, setError] = useState<string | null>(null);
+    const [heroFields, setHeroFields] = useState<Hero>(initialHero)
+    const [error, setError] = useState<string | null>(null)
 
     const handleFieldChange = (field: keyof Hero) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setHeroFields(prev => ({
             ...prev,
             [field]: event.target.value,
-        }));
-    };
+        }))
+    }
 
     const handleGenderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        handleFieldChange('genderLabel')(event as unknown as React.ChangeEvent<HTMLInputElement>);
-    };
+        handleFieldChange('genderLabel')(event as unknown as React.ChangeEvent<HTMLInputElement>)
+    }
 
     const handleSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+        event.preventDefault()
         try {
-            onSubmit(heroFields);
+            onSubmit(heroFields)
         } catch (err) {
-            setError('Validation failed: Some fields are invalid.');
+            setError('El héroe no es válido. Por favor, revisa los campos introducidos.')
         }
-    }, [heroFields, onSubmit]);
+    }, [heroFields, onSubmit])
 
     return (
         <form className="grid gap-4 py-4" onSubmit={handleSubmit}>
@@ -53,8 +52,8 @@ const HeroForm: React.FC<HeroFormProps> = ({ initialHero, onSubmit }) => {
                     className="border border-gray-300 rounded-md px-3 py-1"
                 >
                     <option value="">Selecciona el género</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
+                    <option value="Male">Masculino</option>
+                    <option value="Female">Femenino</option>
                 </select>
                 <Label htmlFor="citizenshipLabel">Ciudadanía</Label>
                 <Input
@@ -97,4 +96,4 @@ const HeroForm: React.FC<HeroFormProps> = ({ initialHero, onSubmit }) => {
     );
 };
 
-export default HeroForm;
+export default HeroForm
