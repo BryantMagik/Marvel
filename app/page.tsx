@@ -11,7 +11,7 @@ const Home: React.FC = () => {
 
   return (
     <div className='container mx-auto bg-gradient-to-r from-slate-900 to-slate-700 p-8'>
-      <h1 className='text-3xl text-center text-white mb-8'>Heroes</h1>
+      <h1 className='text-3xl text-center text-white mb-8'>Panel de Control</h1>
       <div className='flex items-stretch'>
         <AddHeroForm onAddHero={handleAddHero} />
       </div>

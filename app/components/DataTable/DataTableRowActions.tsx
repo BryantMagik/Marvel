@@ -29,7 +29,6 @@ const DataTableRowActions: React.FC<DataTableRowActionsProps<Hero>> = ({ row, on
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className='bg-black'>
                 <EditHeroForm hero={row.original} onSave={(editedHero) => { onEdit(editedHero) }} />
-
                 <DropdownMenuSeparator />
                 <Button className='border-0 flex space-x-4 ' variant="outline" onClick={() => onDelete(row.original)}>Borrar Héroe</Button>
             </DropdownMenuContent>

@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Hero } from "./hero"
 import OrderTable from "../components/orderTable"
 import DataTableRowActions from "../components/DataTable/DataTableRowActions"
-import { Search, Settings } from "lucide-react"
+import { Settings } from "lucide-react"
 
 export const columns = (onEdit: (hero: Hero) => void, onDelete: (hero: Hero) => void): ColumnDef<Hero>[] => [
     {
@@ -13,7 +13,7 @@ export const columns = (onEdit: (hero: Hero) => void, onDelete: (hero: Hero) => 
             return (
                 <OrderTable onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} nameTable="Nombre" />
             )
-        },
+        }
     },
     {
         accessorKey: "genderLabel",
